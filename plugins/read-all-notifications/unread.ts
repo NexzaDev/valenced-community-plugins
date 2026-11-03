@@ -124,7 +124,7 @@ export function markAllAsRead() {
 		})
 
 		const noun = targets.length === 1 ? 'channel' : 'channels'
-		notify('READ_ALL_DONE', `Marked ${targets.length} ${noun} as read.`)
+		notify('READ_ALL_DONE', `Marked ${targets.length} ${noun} as read`)
 	} catch (error) {
 		notify(
 			'READ_ALL_ERROR',
