@@ -83,17 +83,13 @@ function collectUnreadTargets(): AckTarget[] {
 	}
 
 	for (const { id: guildId } of Object.values(guilds.getGuilds())) {
-		try {
-			const groups = channels.getChannels(guildId) ?? {}
-			const entries = [...(groups.SELECTABLE ?? []), ...(groups.VOCAL ?? [])]
-			for (const entry of entries) consider(entry)
+		const groups = channels.getChannels(guildId) ?? {}
+		const entries = [...(groups.SELECTABLE ?? []), ...(groups.VOCAL ?? [])]
+		for (const entry of entries) consider(entry)
 
-			const joined = threads?.getActiveJoinedThreadsForGuild(guildId) ?? {}
-			for (const byParent of Object.values(joined)) {
-				for (const entry of Object.values(byParent)) consider(entry)
-			}
-		} catch {
-			continue
+		const joined = threads?.getActiveJoinedThreadsForGuild(guildId) ?? {}
+		for (const byParent of Object.values(joined)) {
+			for (const entry of Object.values(byParent)) consider(entry)
 		}
 	}
 
@@ -101,11 +97,7 @@ function collectUnreadTargets(): AckTarget[] {
 }
 
 function notify(key: string, text: string, variant?: 'critical') {
-	try {
-		ToastActionCreators.open(key, { text, variant })
-	} catch {
-		return
-	}
+	ToastActionCreators.open(key, { text, variant })
 }
 
 export function markAllAsRead() {

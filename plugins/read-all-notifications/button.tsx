@@ -1,6 +1,5 @@
 import { getAssetIdByName } from '@valenced/assets'
 import { Design } from '@valenced/discord/design'
-import { createElement, Fragment } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { markAllAsRead } from './unread'
 import type { ComponentType } from 'react'
@@ -55,18 +54,24 @@ function ReadAllButton() {
 export function createDirectMessagesEntryPatcher() {
 	const wrappers = new WeakMap<object, EntryComponent>()
 	const wrapperTypes = new WeakSet<object>()
+	let renderingWrapper = false
 
 	function wrap(Original: EntryComponent): EntryComponent {
 		const existing = wrappers.get(Original)
 		if (existing) return existing
 
 		function ReadAllDmWrapper(props: EntryProps) {
-			return createElement(
-				Fragment,
-				null,
-				createElement(Original, props),
-				createElement(ReadAllButton),
-			)
+			renderingWrapper = true
+			try {
+				return (
+					<>
+						<Original {...props} />
+						<ReadAllButton />
+					</>
+				)
+			} finally {
+				renderingWrapper = false
+			}
 		}
 
 		wrappers.set(Original, ReadAllDmWrapper)
@@ -79,6 +84,7 @@ export function createDirectMessagesEntryPatcher() {
 		props: unknown,
 	): type is EntryComponent {
 		return (
+			!renderingWrapper &&
 			isComponent(type) &&
 			!wrapperTypes.has(type) &&
 			isRecord(props) &&
@@ -90,12 +96,8 @@ export function createDirectMessagesEntryPatcher() {
 	return function patchEntry<Args extends [unknown, unknown?, ...unknown[]]>(
 		args: Args,
 	): Args {
-		try {
-			const [type, props] = args
-			if (isDirectMessagesEntry(type, props)) args[0] = wrap(type)
-		} catch {
-			return args
-		}
+		const [type, props] = args
+		if (isDirectMessagesEntry(type, props)) args[0] = wrap(type)
 		return args
 	}
 }
