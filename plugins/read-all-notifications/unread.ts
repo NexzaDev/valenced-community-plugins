@@ -113,7 +113,7 @@ export function markAllAsRead() {
 		const targets = collectUnreadTargets()
 
 		if (!targets.length) {
-			notify('READ_ALL_NOTHING', 'You have no unread channels.')
+			notify('READ_ALL_NOTHING', 'You have no unread channels')
 			return
 		}
 
