@@ -1,11 +1,11 @@
 {
 	"format": 1,
-	"id": "community.read-all-notifications",
+	"id": "dev.nexza.read-all-notifications",
 	"name": "Read All Notifications",
-	"description": "Marks every unread server channel and thread as read with a single tap. A button sits right under the Direct Messages button in your server list, and is also available in the plugin settings.",
+	"description": "Marks every unread server channel and thread as read with a single tap. A button sits right under the Direct Messages button in your server list.",
 	"author": "NexzaDev (https://github.com/NexzaDev \"GitHub\")",
 	"contributors": [
-		"kemo (original Vencord plugin)"
+		"kemo (https://github.com/kem0x \"GitHub\")"
 	],
 	"icon": "ChatCheckIcon",
 	"version": "1.0.0",

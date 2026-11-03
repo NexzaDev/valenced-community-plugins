@@ -39,15 +39,13 @@ function getComponentName(type: unknown): string | undefined {
 }
 
 function ReadAllButton() {
-	const icon = getAssetIdByName('ChatCheckIcon')
-
 	return (
 		<View style={styles.container}>
 			<IconButton
 				accessibilityLabel="Mark all as read"
 				variant="secondary"
 				size="md"
-				icon={icon}
+				icon={getAssetIdByName('ChatCheckIcon')}
 				onPress={markAllAsRead}
 			/>
 		</View>

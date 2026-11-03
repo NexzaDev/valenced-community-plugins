@@ -1,7 +1,6 @@
 import { before } from '@valenced/patcher'
 import { ReactJSXRuntime } from '@valenced/react'
 import { createDirectMessagesEntryPatcher } from './button'
-import SettingsComponent from './settings'
 
 export default plugin({
 	start({ cleanup }) {
@@ -12,5 +11,4 @@ export default plugin({
 			before(ReactJSXRuntime, 'jsxs', patchEntry),
 		)
 	},
-	SettingsComponent,
 })
