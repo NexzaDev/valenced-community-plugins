@@ -2,7 +2,7 @@
 	"format": 1,
 	"id": "dev.nexza.read-all-notifications",
 	"name": "Read All Notifications",
-	"description": "Marks every unread server channel and thread as read with a single tap. A button sits right under the Direct Messages button in your server list.",
+	"description": "Mark unread server channels as read with a button under your DMs in the server list.",
 	"author": "NexzaDev (https://github.com/NexzaDev \"GitHub\")",
 	"contributors": [
 		"kemo (https://github.com/kem0x \"GitHub\")"
